@@ -40,7 +40,7 @@ class PostController extends Controller
     {
         Post::find($post->id);
 
-        return response()->json($post);
+        return view('posts.show', compact('post'));
 
     }
 
