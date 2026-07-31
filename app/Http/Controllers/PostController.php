@@ -14,10 +14,9 @@ class PostController extends Controller
      */
     public function index()
     {
-        $posts = Post::all();
+        $posts = Post::with('user')->get();
 
         return view('posts.index', compact('posts'));
-
     }
 
     /**
@@ -38,12 +37,10 @@ class PostController extends Controller
      */
     public function show(Post $post)
     {
-        Post::find($post->id);
+        $post->load('user');
 
         return view('posts.show', compact('post'));
-
     }
-
 
     /**
      * Update the specified resource in storage.
