@@ -1,0 +1,3 @@
+@props(['type' => 'info'])
+
+{{ $slot }}

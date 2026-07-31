@@ -8,12 +8,16 @@ use Illuminate\Http\Request;
 
 class PostController extends Controller
 {
+
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        Post::all();
+        $posts = Post::all();
+
+        return view('posts.index', compact('posts'));
+
     }
 
     /**
@@ -34,7 +38,10 @@ class PostController extends Controller
      */
     public function show(Post $post)
     {
-        //
+        Post::find($post->id);
+
+        return response()->json($post);
+
     }
 
 
