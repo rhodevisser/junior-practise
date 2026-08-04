@@ -4,10 +4,12 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StorePostRequest;
 use App\Models\Post;
+use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Http\Request;
 
 class PostController extends Controller
 {
+    use AuthorizesRequests;
 
     /**
      * Display a listing of the resource.
@@ -47,7 +49,7 @@ class PostController extends Controller
      */
     public function update(Request $request, Post $post)
     {
-        ////
+        $this->authorize('update', $post);
     }
 
     /**
@@ -55,6 +57,8 @@ class PostController extends Controller
      */
     public function destroy(Post $post)
     {
+        $this->authorize('destroy', $post);
+
         $post->delete();
 
         return response()->json(null, 204);
