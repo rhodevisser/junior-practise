@@ -3,7 +3,9 @@
 namespace App\Providers;
 
 use App\Models\Post;
+use App\Models\Product;
 use App\Models\User;
+use App\Observers\ProductObserver;
 use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\View;
@@ -24,6 +26,8 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
+        Product::observe(ProductObserver::class);
+
         Blade::directive('datetime', function ($expression) {
             return "<?php echo ($expression)->format('d-m-Y H:i'); ?>";
         });
