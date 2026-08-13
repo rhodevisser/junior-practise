@@ -6,6 +6,7 @@ use App\Models\Post;
 use App\Models\Product;
 use App\Models\User;
 use App\Observers\ProductObserver;
+use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\View;
@@ -40,6 +41,12 @@ class AppServiceProvider extends ServiceProvider
 
         View::composer ('posts.index', function ($view) {
             $view->with('latestPost', Post::latest()->first());
+        });
+
+        Collection::macro('toUpper', function () {
+            return $this->map(function ($item) {
+                return strtoupper($item);
+            });
         });
     }
 }
